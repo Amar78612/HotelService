@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using HotelApiService.Models;
+using HotelApiService.Repository;
 
 namespace HotelApiService.Controllers
 {
@@ -14,14 +15,11 @@ namespace HotelApiService.Controllers
     {
         public IActionResult Get()
         {
-            var roomList = new List<Hotel>() {
-                new Hotel(){HotelId=100,  HotelName="ABC",  HotelAddress="Pippari Chichwad, Pune", City="Pune", State="Maharashtra", PinCode="411000", IsActive="Available" },
-                 new Hotel(){HotelId=101,  HotelName="PQR",  HotelAddress="Mumbai Bandra", City="Mumbai", State="Maharashtra", PinCode="411222", IsActive="Available" },
-                  new Hotel(){HotelId=100,  HotelName="XYZ",  HotelAddress="Nampalli Hydrabad", City="Hydrabad", State="Maharashtra", PinCode="411333", IsActive="Available" }
+            List<Hotel> hotels = HotelRepository.GetHotels();
 
-            };
 
-            return Ok(roomList);
+            return Ok(hotels);
+           
         }
     }
 }
