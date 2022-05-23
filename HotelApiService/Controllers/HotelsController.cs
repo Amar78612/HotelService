@@ -21,5 +21,41 @@ namespace HotelApiService.Controllers
             return Ok(hotels);
            
         }
+         public IActionResult Get(int id)
+        {
+
+            var hotel = hotels.SingleOrDefault(x => x.HotelId == id);
+            if (hotel == null)
+            {
+                return NotFound("No hotel Found");
+            }
+            return Ok(hotel);
+        }
+        [HttpPost]
+        public IActionResult Addhotel(Hotel hotel)
+        {
+            hotels.Add(hotel);
+            if (hotels.Count == 0)
+            {
+                return NotFound("No List Found");
+            }
+            return Ok(hotels);
+        }
+        [HttpDelete]
+
+        public IActionResult Delete(int id)
+        {
+            var hotel = hotels.SingleOrDefault(x => x.HotelId == id);
+            if (hotel == null)
+            {
+                return NotFound("No hotel Found");
+            }
+            hotels.Remove(hotel);
+            if (hotels.Count == 0)
+            {
+                return NotFound("No List Found");
+            }
+            return Ok(hotels);
+        }
     }
 }
